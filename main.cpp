@@ -4,23 +4,20 @@ using namespace std;
 int main() {
     setlocale(LC_ALL, "Ukrainian");
 
-    // 1. Ініціалізація масиву в коді (вимога п. 7)
-    const int N = 12;
-    int A[N] = { 4, 3, 6, 8, 5, 10, 15, 20, 2, 7, 9, 12 };
-    double C[N];
+    int n;
+    cout << "Р’РІРµРґС–С‚СЊ РєС–Р»СЊРєС–СЃС‚СЊ РµР»РµРјРµРЅС‚С–РІ РјР°СЃРёРІСѓ A: ";
+    cin >> n;
 
-    cout << "Початковий масив A: ";
-    for (int i = 0; i < N; i++) {
-        cout << A[i] << " ";
+    int* A = new int[n];
+    double* C = new double[n];
+
+    cout << "Р’РІРµРґС–С‚СЊ " << n << " С†С–Р»РёС… С‡РёСЃРµР» С‡РµСЂРµР· РїСЂРѕР±С–Р»: ";
+    for (int i = 0; i < n; i++) {
+        cin >> A[i];
     }
-    cout << endl;
 
-    // 2. Пошук другого непарного елемента
-    int oddCount = 0;
-    int secondOddIndex = -1;
-    int secondOddValue = 0;
-
-    for (int i = 0; i < N; i++) {
+    int oddCount = 0, secondOddIndex = -1, secondOddValue = 0;
+    for (int i = 0; i < n; i++) {
         if (A[i] % 2 != 0) {
             oddCount++;
             if (oddCount == 2) {
@@ -31,23 +28,21 @@ int main() {
         }
     }
 
-    // 3. Перевірка умови та формування масиву C
     if (secondOddIndex == -1) {
-        cout << "Помилка: у масиві менше двох непарних елементів!" << endl;
-    }
-    else {
+        cout << "РџРѕРјРёР»РєР°: Сѓ РјР°СЃРёРІС– РјРµРЅС€Рµ РґРІРѕС… РЅРµРїР°СЂРЅРёС… РµР»РµРјРµРЅС‚С–РІ!" << endl;
+    } else {
         int cSize = 0;
-        for (int i = secondOddIndex; i < N; i++) {
-            C[cSize] = (double)A[i] / secondOddValue;
-            cSize++;
+        for (int i = secondOddIndex; i < n; i++) {
+            C[cSize++] = (double)A[i] / secondOddValue;
         }
-
-        cout << "Новоутворений масив C (ділення на " << secondOddValue << "): ";
+        cout << "РќРѕРІРѕСѓС‚РІРѕСЂРµРЅРёР№ РјР°СЃРёРІ C (РґС–Р»РµРЅРЅСЏ РЅР° " << secondOddValue << "): ";
         for (int i = 0; i < cSize; i++) {
             cout << C[i] << " ";
         }
         cout << endl;
     }
 
+    delete[] A;
+    delete[] C;
     return 0;
 }
